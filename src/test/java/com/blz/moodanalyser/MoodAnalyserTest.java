@@ -4,20 +4,41 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class MoodAnalyserTest {
-
-    //sad mood test case
     @Test
-    public void givingSadMessage_returnSadMood(){
-        MoodAnalyser analyser=new MoodAnalyser();
-        String mood=analyser.analyseMood("This is sad message");
-        Assertions.assertEquals("SAD",mood );
+    public void givenSadWhileAnalysisMoodShouldReturnSad() {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser("I am in Sad Mood");
+        try {
+            Assertions.assertEquals("SAD",moodAnalyzer.analyseMood());
+        } catch (MoodAnalyzerException e) {
+        }
     }
 
-    //happy mood testcase
     @Test
-    public void givingHappyMessage() {
-        MoodAnalyser analyser = new MoodAnalyser();
-        String mood = analyser.analyseMood("Iam in any mood");
-        Assertions.assertEquals("HAPPY", mood);
+    public void givenHappyWhileAnalysisMoodShouldReturnHappy() {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser("I am in Happy Mood");
+        try {
+            Assertions.assertEquals("HAPPY",moodAnalyzer.analyseMood());
+        } catch (MoodAnalyzerException e) {
+        }
+    }
+
+    @Test
+    public void givenNullWhileAnalysisMoodShouldReturnHappy() {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser(null);
+        try {
+            moodAnalyzer.analyseMood();
+        } catch (MoodAnalyzerException e) {
+            Assertions.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_NULL, e.getType());
+        }
+    }
+
+    @Test
+    public void givenEmptyWhileAnalysisMoodShouldReturnHappy() {
+        MoodAnalyser moodAnalyzer = new MoodAnalyser("");
+        try {
+            moodAnalyzer.analyseMood();
+        } catch (MoodAnalyzerException e) {
+            Assertions.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY, e.getType());
+        }
     }
 }
