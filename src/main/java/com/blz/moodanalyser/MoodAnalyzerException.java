@@ -1,20 +1,17 @@
 package com.blz.moodanalyser;
 
 public class MoodAnalyzerException extends Exception{
-    enum ExceptionType {
-        ENTERED_NULL,ENTERED_EMPTY
-    }
+    private static final long serialVersionUID = 1L;
 
-    private ExceptionType type;
+    enum ExceptionType {ENTERED_NULL,ENTERED_EMPTY}
+    ExceptionType type;
 
-    public ExceptionType getType() {
-        return this.type;
-    }
-
-    public MoodAnalyzerException(ExceptionType type, String message) {
+    public MoodAnalyzerException(String message) {
         super(message);
-        this.type = type;
-        System.out.println("Exception type : "+type);
-        System.out.println("Message : "+message);
+    }
+
+    public MoodAnalyzerException(ExceptionType type,String message) {
+        super(message);
+        this.type=type;
     }
 }
